@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nhật Ký Hải Trình - Trịnh Hòa</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Noto+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles/diary.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container-fluid">
+          <div class="hero-content text-center">
+            <div class="hero-icon">
+              <i class="fas fa-ship"></i>
+            </div>
+            <h1 class="hero-title">Nhật Ký Hải Trình</h1>
+            <p class="hero-subtitle">
+              Hành trình vĩ đại của Đô đốc Trịnh Hòa - Khám phá bảy chuyến biển
+              huyền thoại xuyên suốt châu Á và châu Phi (1405-1433)
+            </p>
+            <div class="hero-meta">
+              <i class="fas fa-user-edit me-2"></i>
+              Tác giả: Nhóm dự án • 2025
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Content -->
+      <div class="container">
+        <!-- Navigation -->
+        <nav class="voyage-nav">
+          <ul
+            class="nav nav-pills justify-content-center flex-wrap"
+            role="tablist"
+          >
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" href="/" data-voyage="all">
+                <i class="fas fa-globe me-2"></i>Tất cả chuyến đi
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="voyage.html?v=1" data-voyage="1">
+                <i class="fas fa-anchor me-2"></i>Chuyến 1
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="voyage.html?v=2" data-voyage="2">
+                <i class="fas fa-compass me-2"></i>Chuyến 2
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="voyage.html?v=3" data-voyage="3">
+                <i class="fas fa-water me-2"></i>Chuyến 3
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="voyage.html?v=4" data-voyage="4">
+                <i class="fas fa-map-marked-alt me-2"></i>Chuyến 4
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="voyage.html?v=5" data-voyage="5">
+                <i class="fas fa-route me-2"></i>Chuyến 5
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="voyage.html?v=6" data-voyage="6">
+                <i class="fas fa-dharmachakra me-2"></i>Chuyến 6
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="voyage.html?v=7" data-voyage="7">
+                <i class="fas fa-flag-checkered me-2"></i>Chuyến 7
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Chapters Grid -->
+        <div id="chapters-container" class="chapter-grid">
+          <!-- Sample Chapters - Replace with actual data -->
+          <div class="chapter-card" data-voyage="1">
+            <div class="chapter-card-body">
+              <div class="chapter-number">1.1</div>
+              <h3 class="chapter-title">Khởi Hành Từ Nanjing</h3>
+              <div class="chapter-meta">
+                <span class="meta-item">
+                  <i class="fas fa-calendar-alt"></i>
+                  <span>1405</span>
+                </span>
+                <span class="meta-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Nanjing, Trung Quốc</span>
+                </span>
+              </div>
+              <p class="chapter-preview">
+                Ngày hôm nay, ta được Hoàng đế ban lệnh xuất hải. Hơn 300 chiến
+                thuyền, 27,000 thủy thủ và binh lính đã sẵn sàng. Đây là khởi
+                đầu của một hành trình vĩ đại chưa từng có trong lịch sử...
+              </p>
+              <a href="voyage.html?v=1" class="read-more-btn">
+                Đọc thêm <i class="fas fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="chapter-card" data-voyage="1">
+            <div class="chapter-card-body">
+              <div class="chapter-number">1.2</div>
+              <h3 class="chapter-title">Đến Champa</h3>
+              <div class="chapter-meta">
+                <span class="meta-item">
+                  <i class="fas fa-calendar-alt"></i>
+                  <span>1405</span>
+                </span>
+                <span class="meta-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Champa (Việt Nam)</span>
+                </span>
+              </div>
+              <p class="chapter-preview">
+                Sau nhiều ngày hành hải, đoàn thuyền đã cập bến Champa. Người
+                dân địa phương chào đón ta với sự kính trọng. Vua Champa ban
+                tặng nhiều lễ vật quý giá và hương liệu...
+              </p>
+              <a href="voyage.html?v=1" class="read-more-btn">
+                Đọc thêm <i class="fas fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="chapter-card" data-voyage="2">
+            <div class="chapter-card-body">
+              <div class="chapter-number">2.1</div>
+              <h3 class="chapter-title">Trở Lại Biển Khơi</h3>
+              <div class="chapter-meta">
+                <span class="meta-item">
+                  <i class="fas fa-calendar-alt"></i>
+                  <span>1407</span>
+                </span>
+                <span class="meta-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Ấn Độ Dương</span>
+                </span>
+              </div>
+              <p class="chapter-preview">
+                Chuyến đi thứ hai bắt đầu với quyết tâm mới. Ta mang theo nhiều
+                sứ giả từ các quốc gia đã ghé thăm trước đây. Mục tiêu lần này
+                là đi xa hơn, đến tận Ấn Độ và xa hơn nữa...
+              </p>
+              <a href="voyage.html?v=2" class="read-more-btn">
+                Đọc thêm <i class="fas fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State (show when filtering) -->
+        <div id="empty-state" class="empty-state d-none">
+          <i class="fas fa-search"></i>
+          <h3>Không tìm thấy chương nào</h3>
+          <p>Vui lòng chọn chuyến đi khác hoặc xem tất cả</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <div class="social-icons">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Youtube"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+            <div class="footer-links">
+              <a href="#about">Giới thiệu</a>
+              <a href="#contact">Liên hệ</a>
+              <a href="#resources">Tài nguyên</a>
+              <a href="#privacy">Chính sách</a>
+            </div>
+            <p class="mb-0">
+              &copy; 2025 Nhật Ký Hải Trình - Dự án học tập về Đô đốc Trịnh Hòa
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="src/main.jsx"></script>
+    <script type="module" src="src/diary-loader.js"></script>
+  </body>
+</html>

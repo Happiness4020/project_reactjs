@@ -1,0 +1,51 @@
+[
+  {
+    "id": "v1",
+    "date": "01/03/1605",
+    "title": "Chặng 1 — Khởi hành",
+    "content": "Hôm nay đoàn khởi hành, gió nhẹ và tinh thần rộn ràng. Là người chỉ huy, tôi ghi lại những tâm sự và mục tiêu của chuyến đi: khám phá vùng biển chưa được biết, thu thập mẫu vật, và ghi lại bản đồ hải trình.",
+    "analysis": "Mục đích: khảo sát, thu thập sinh vật kỳ lạ, và xác định tuyến đường đáng tin cậy cho các chuyến tiếp theo."
+  },
+  {
+    "id": "v2",
+    "date": "12/06/1606",
+    "title": "Chặng 2 — Bờ biển lạ",
+    "content": "Phát hiện những loài thực vật chưa từng thấy. Ghi lại kích thước, màu sắc, và nơi thu thập. Các thủy thủ tỏ ra hồi hộp, một số lo lắng về điều chúng ta chưa hiểu.",
+    "analysis": "Phân tích: Các mẫu có thể đóng vai trò quan trọng trong nghiên cứu sinh học địa phương."
+  },
+  {
+    "id": "v3",
+    "date": "05/09/1607",
+    "title": "Chặng 3 — Cuộc gặp với thủy quái",
+    "content": "Trong một đêm, chúng tôi chứng kiến hình dạng khác lạ dưới sóng. Thu thập dữ kiện và cố gắng vẽ phác thảo nhanh để giữ bằng chứng.",
+    "analysis": "Mục đích thực sự: Xác minh xem đây có phải là sinh vật bản địa hay loài di trú."
+  },
+  {
+    "id": "v4",
+    "date": "18/02/1608",
+    "title": "Chặng 4 — Bão lớn",
+    "content": "Một cơn bão thử thách kỹ năng điều hướng và lòng dũng cảm của cả đoàn. Ghi chú về thủy triều, hướng gió và thiệt hại trên tàu.",
+    "analysis": "Phân tích: Điều kiện thời tiết càng cho thấy tầm quan trọng của việc ghi chép cẩn trọng."
+  },
+  {
+    "id": "v5",
+    "date": "01/11/1609",
+    "title": "Chặng 5 — Hòn đảo kỳ lạ",
+    "content": "Hòn đảo với địa hình và sinh vật độc đáo. Thu thập mẫu và nghiên cứu sự tương tác sinh thái.",
+    "analysis": "Phân tích: Hòn đảo có thể chứa nguồn tài nguyên quý, nhưng cần thận trọng."
+  },
+  {
+    "id": "v6",
+    "date": "22/04/1610",
+    "title": "Chặng 6 — Thương lượng với dân bản địa",
+    "content": "Gặp gỡ người bản địa, trao đổi văn hóa và thu nhận tri thức bản địa về biển cả.",
+    "analysis": "Phân tích: Tầm quan trọng của giao tiếp văn hoá để hiểu mục đích thực sự của chuyến đi."
+  },
+  {
+    "id": "v7",
+    "date": "30/12/1612",
+    "title": "Chặng 7 — Kết thúc cuộc hành trình",
+    "content": "Kết luận: Tổng hợp các phát hiện, những bài học và đề xuất cho các nghiên cứu sau này.",
+    "analysis": "Phân tích: Hành trình này đã mở rộng hiểu biết về biển cả và cung cấp cơ sở cho nghiên cứu tiếp theo."
+  }
+]
