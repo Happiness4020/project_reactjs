@@ -6,6 +6,12 @@ function getQueryParam(name) {
 async function loadVoyage() {
   const id = getQueryParam("v");
   const root = document.getElementById("voyage-root");
+  if (!root) {
+    // If the expected root container doesn't exist, abort early to avoid
+    // attempting to write into a null element (this happens on some pages).
+    console.warn("voyage-loader: #voyage-root not found, aborting loadVoyage");
+    return;
+  }
   // If there's no query param `v`, do nothing and keep the sample content
   if (!id) return;
 
@@ -17,7 +23,11 @@ async function loadVoyage() {
   if (voyageContent) voyageContent.style.display = "none";
 
   try {
-    const res = await fetch("/src/data/journal.json");
+    // Use a relative path (no leading slash) so the request works when the
+    // site is hosted under a repo subpath on GitHub Pages (e.g.
+    // https://username.github.io/repo-name/). A leading slash requests the
+    // domain root which will 404 for repo pages.
+    const res = await fetch("src/data/journal.json");
     if (!res.ok) throw new Error("Không thể tải dữ liệu");
     const chapters = await res.json();
 

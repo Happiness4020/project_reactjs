@@ -24,7 +24,10 @@ const createElement = (tag, attrs = {}, ...children) => {
 
 async function loadJournal() {
   try {
-    const res = await fetch("/src/data/journal.json");
+    // Request the JSON relative to the current document so it works when the
+    // site is hosted under a repository subpath on GitHub Pages. A leading
+    // slash targets the domain root and will 404 for repo pages.
+    const res = await fetch("src/data/journal.json");
     if (!res.ok) throw new Error("Không thể tải dữ liệu: " + res.status);
     const entries = await res.json();
 
