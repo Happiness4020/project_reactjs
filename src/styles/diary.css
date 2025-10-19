@@ -1,12 +1,13 @@
 :root {
-  --ocean-dark: #0a4d68;
-  --ocean-medium: #088395;
-  --ocean-light: #05bfdb;
-  --sand: #f4e4c1;
-  --parchment: #fef9e7;
-  --gold: #d4af37;
-  --text-dark: #2c3e50;
-  --shadow: rgba(0, 0, 0, 0.1);
+  /* Warm parchment / sepia palette (keeps variable names so references remain valid) */
+  --ocean-dark: #6b3f23; /* deep brown */
+  --ocean-medium: #8f5e3a; /* medium sepia */
+  --ocean-light: #c9a87a; /* light tan */
+  --sand: #f4e4c1; /* pale sand */
+  --parchment: #f3e7d6; /* warm parchment */
+  --gold: #d4af37; /* keep gold accent */
+  --text-dark: #3b2f2a; /* dark warm text */
+  --shadow: rgba(0, 0, 0, 0.12);
 }
 
 * {
@@ -17,7 +18,18 @@
 
 body {
   font-family: "Noto Sans", sans-serif;
-  background: linear-gradient(135deg, #e8f4f8 0%, #b8dce8 100%);
+  /* warm parchment base with subtle vignette */
+  background: radial-gradient(
+      1200px 600px at 10% 10%,
+      rgba(255, 255, 240, 0.6),
+      transparent 20%
+    ),
+    radial-gradient(
+      1000px 500px at 90% 90%,
+      rgba(220, 200, 180, 0.25),
+      transparent 20%
+    ),
+    linear-gradient(180deg, var(--parchment) 0%, #efe1cf 100%);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
@@ -30,15 +42,21 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
+  /* subtle aged-paper noise and warm radial washes */
   background-image: radial-gradient(
       circle at 20% 80%,
-      rgba(8, 131, 149, 0.03) 0%,
+      rgba(139, 69, 19, 0.03) 0%,
       transparent 50%
     ),
     radial-gradient(
       circle at 80% 20%,
-      rgba(5, 191, 219, 0.03) 0%,
+      rgba(205, 133, 63, 0.02) 0%,
       transparent 50%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.01) 0 1px,
+      transparent 1px 10px
     );
   pointer-events: none;
   z-index: 0;
@@ -53,10 +71,11 @@ body::before {
 
 /* Hero Section */
 .hero-section {
+  /* warm, museum-like header strip */
   background: linear-gradient(
-    135deg,
+    90deg,
     var(--ocean-dark) 0%,
-    var(--ocean-medium) 100%
+    var(--ocean-medium) 60%
   );
   color: white;
   padding: 80px 0 80px;
@@ -82,10 +101,11 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 30, 50 50 T 100 50' stroke='rgba(255,255,255,0.1)' fill='none' stroke-width='2'/%3E%3Cpath d='M0 70 Q 25 50, 50 70 T 100 70' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+  /* subtle decorative lines in a darker tone to suit sepia header */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 30, 50 50 T 100 50' stroke='rgba(0,0,0,0.06)' fill='none' stroke-width='2'/%3E%3Cpath d='M0 70 Q 25 50, 50 70 T 100 70' stroke='rgba(0,0,0,0.03)' fill='none' stroke-width='2'/%3E%3C/svg%3E");
   background-size: 200px 100px;
   animation: wave 20s linear infinite;
-  opacity: 0.3;
+  opacity: 0.25;
 }
 
 @keyframes wave {
@@ -106,6 +126,7 @@ body::before {
   font-size: 60px;
   margin-bottom: 20px;
   animation: float 3s ease-in-out infinite;
+  color: var(--ocean-light);
 }
 
 @keyframes float {
@@ -123,7 +144,7 @@ body::before {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 15px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
 }
 
 .hero-subtitle {
@@ -157,21 +178,21 @@ body::before {
   margin: 5px;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .nav-pills .nav-link:hover {
   background: var(--ocean-light);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
 }
 
 .nav-pills .nav-link.active {
   background: var(--ocean-medium);
   color: white;
   border-color: var(--ocean-medium);
-  box-shadow: 0 6px 20px rgba(8, 131, 149, 0.4);
+  box-shadow: 0 6px 20px rgba(143, 94, 58, 0.28);
 }
 
 /* Chapter Cards */
@@ -259,7 +280,9 @@ body::before {
   line-height: 1.7;
   margin-bottom: 20px;
   display: -webkit-box;
+  /* Keep webkit prefixed property first for compatibility, then the standard property */
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
