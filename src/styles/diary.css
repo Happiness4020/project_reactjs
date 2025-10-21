@@ -1,12 +1,12 @@
 :root {
-  /* Warm parchment / sepia palette (keeps variable names so references remain valid) */
-  --ocean-dark: #6b3f23; /* deep brown */
-  --ocean-medium: #8f5e3a; /* medium sepia */
-  --ocean-light: #c9a87a; /* light tan */
-  --sand: #f4e4c1; /* pale sand */
-  --parchment: #f3e7d6; /* warm parchment */
-  --gold: #d4af37; /* keep gold accent */
-  --text-dark: #3b2f2a; /* dark warm text */
+  /* Bảng màu Giấy Da / Bản Đồ Cũ (Đã điều chỉnh) */
+  --ocean-dark: #5d4037; /* Nâu sepia đậm (cho bóng tối) */
+  --ocean-medium: #8c6d46; /* Nâu gỗ/da (tông màu trung bình) */
+  --ocean-light: #c7b299; /* Nâu tan/be sáng (cho highlight) */
+  --sand: #e9d8b8; /* Màu cát/giấy cũ hơi sẫm */
+  --parchment: #f5eeda; /* Màu giấy da/parchment (nền chính) */
+  --gold: #d4af37; /* Giữ nguyên màu vàng gold */
+  --text-dark: #4a3b2f; /* Màu chữ nâu đen (gần giống trong hình) */
   --shadow: rgba(0, 0, 0, 0.12);
 }
 
@@ -18,7 +18,7 @@
 
 body {
   font-family: "Noto Sans", sans-serif;
-  /* warm parchment base with subtle vignette */
+  /* warm parchment base with subtle vignette (GIỮ NGUYÊN) */
   background: radial-gradient(
       1200px 600px at 10% 10%,
       rgba(255, 255, 240, 0.6),
@@ -35,6 +35,9 @@ body {
   overflow-x: hidden;
 }
 
+/* *** PHẦN ĐƯỢC CẬP NHẬT CHÍNH ***
+  Phần body::before này tạo ra lớp vân giấy và vết ố
+*/
 body::before {
   content: "";
   position: fixed;
@@ -42,22 +45,31 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  /* subtle aged-paper noise and warm radial washes */
-  background-image: radial-gradient(
-      circle at 20% 80%,
-      rgba(139, 69, 19, 0.03) 0%,
-      transparent 50%
+
+  /* Lớp 1: Vệt ố màu nâu nhạt (dùng var --ocean-light)
+    Lớp 2: Vệt ố màu nâu sẫm hơn (dùng var --ocean-medium)
+    Lớp 3: Hiệu ứng giấy nhiễu (noise) bằng SVG
+  */
+  background-image: 
+    /* Vệt ố 1 (góc trên trái) */ radial-gradient(
+      circle at 20% 15%,
+      rgba(199, 178, 153, 0.25) 0%,
+      /* --ocean-light với 25% opacity */ transparent 50%
     ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(205, 133, 63, 0.02) 0%,
-      transparent 50%
-    ),
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.01) 0 1px,
-      transparent 1px 10px
-    );
+    /* Vệt ố 2 (góc dưới phải) */
+      radial-gradient(
+        circle at 75% 80%,
+        rgba(140, 109, 70, 0.2) 0%,
+        /* --ocean-medium với 20% opacity */ transparent 60%
+      ),
+    /* Lớp nhiễu (noise) để tạo vân giấy */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.07'/%3E%3C/svg%3E");
+
+  /* Chế độ hòa trộn 'multiply' giúp các vệt ố hòa vào nền 
+    một cách tự nhiên, giống như mực thấm vào giấy 
+  */
+  mix-blend-mode: multiply;
+  opacity: 0.85; /* Giảm nhẹ độ gắt của tổng thể hiệu ứng nếu cần */
   pointer-events: none;
   z-index: 0;
   min-height: 100vh;

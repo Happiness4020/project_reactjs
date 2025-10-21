@@ -30,7 +30,7 @@ async function loadVoyage() {
     loading.style.display = "block";
 
     // Đường dẫn tương đối đến file JSON
-    const res = await fetch("src/data/journal.json");
+    const res = await fetch("/src/data/journal.json");
     if (!res.ok) {
       throw new Error(
         `Không thể tải dữ liệu. Lỗi: ${res.status} ${res.statusText}`
@@ -39,7 +39,20 @@ async function loadVoyage() {
     const chapters = await res.json();
 
     // Tìm chapter dựa trên ID
-    const chapter = chapters.find((c) => String(c.number) === id);
+    // journal.json dùng "id": "v1", "v2"... nhưng query param gửi '1', vì vậy hỗ trợ nhiều kiểu tìm:
+    //  - tìm theo trường id (exact)
+    //  - tìm theo 'v' + id
+    //  - tìm theo trường number (nếu có) hoặc so sánh chỉ số
+    const chapter = chapters.find((c) => {
+      const cid = c.id || "";
+      const cnum = c.number !== undefined ? String(c.number) : null;
+      if (cid === id) return true; // match exact id like 'v1'
+      if (cid === `v${id}`) return true; // match 'v1' when id='1'
+      if (cnum && cnum === id) return true; // match numeric
+      // also support when id passed already like 'v1' and items have numeric number field
+      if (id && id.startsWith("v") && cnum && `v${cnum}` === id) return true;
+      return false;
+    });
 
     if (!chapter) {
       throw new Error(`Không tìm thấy dữ liệu cho chuyến đi số ${id}.`);

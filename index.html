@@ -20,7 +20,6 @@
   </head>
   <body>
     <div class="main-container">
-      <!-- Hero Section -->
       <section class="hero-section">
         <div class="container-fluid">
           <div class="hero-content text-center">
@@ -40,9 +39,7 @@
         </div>
       </section>
 
-      <!-- Main Content -->
       <div class="container">
-        <!-- Navigation -->
         <nav class="voyage-nav">
           <ul
             class="nav nav-pills justify-content-center flex-wrap"
@@ -54,46 +51,44 @@
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="voyage.html?v=1" data-voyage="1">
+              <a class="nav-link" href="#" data-voyage="1">
                 <i class="fas fa-anchor me-2"></i>Chuyến 1
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="voyage.html?v=2" data-voyage="2">
+              <a class="nav-link" href="#" data-voyage="2">
                 <i class="fas fa-compass me-2"></i>Chuyến 2
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="voyage.html?v=3" data-voyage="3">
+              <a class="nav-link" href="#" data-voyage="3">
                 <i class="fas fa-water me-2"></i>Chuyến 3
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="voyage.html?v=4" data-voyage="4">
+              <a class="nav-link" href="#" data-voyage="4">
                 <i class="fas fa-map-marked-alt me-2"></i>Chuyến 4
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="voyage.html?v=5" data-voyage="5">
+              <a class="nav-link" href="#" data-voyage="5">
                 <i class="fas fa-route me-2"></i>Chuyến 5
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="voyage.html?v=6" data-voyage="6">
+              <a class="nav-link" href="#" data-voyage="6">
                 <i class="fas fa-dharmachakra me-2"></i>Chuyến 6
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" href="voyage.html?v=7" data-voyage="7">
+              <a class="nav-link" href="#" data-voyage="7">
                 <i class="fas fa-flag-checkered me-2"></i>Chuyến 7
               </a>
             </li>
           </ul>
         </nav>
 
-        <!-- Chapters Grid -->
         <div id="chapters-container" class="chapter-grid">
-          <!-- Sample Chapters - Replace with actual data -->
           <div class="chapter-card" data-voyage="1">
             <div class="chapter-card-body">
               <div class="chapter-number">1.1</div>
@@ -113,7 +108,7 @@
                 thuyền, 27,000 thủy thủ và binh lính đã sẵn sàng. Đây là khởi
                 đầu của một hành trình vĩ đại chưa từng có trong lịch sử...
               </p>
-              <a href="voyage.html?v=1" class="read-more-btn">
+              <a href="#" class="read-more-btn">
                 Đọc thêm <i class="fas fa-arrow-right ms-2"></i>
               </a>
             </div>
@@ -138,7 +133,7 @@
                 dân địa phương chào đón ta với sự kính trọng. Vua Champa ban
                 tặng nhiều lễ vật quý giá và hương liệu...
               </p>
-              <a href="voyage.html?v=1" class="read-more-btn">
+              <a href="#" class="read-more-btn">
                 Đọc thêm <i class="fas fa-arrow-right ms-2"></i>
               </a>
             </div>
@@ -163,14 +158,13 @@
                 sứ giả từ các quốc gia đã ghé thăm trước đây. Mục tiêu lần này
                 là đi xa hơn, đến tận Ấn Độ và xa hơn nữa...
               </p>
-              <a href="voyage.html?v=2" class="read-more-btn">
+              <a href="#" class="read-more-btn">
                 Đọc thêm <i class="fas fa-arrow-right ms-2"></i>
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Empty State (show when filtering) -->
         <div id="empty-state" class="empty-state d-none">
           <i class="fas fa-search"></i>
           <h3>Không tìm thấy chương nào</h3>
@@ -178,7 +172,6 @@
         </div>
       </div>
 
-      <!-- Footer -->
       <footer class="footer">
         <div class="container">
           <div class="footer-content">
@@ -211,6 +204,20 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+      import { VOYAGE_PAGE } from "./src/config.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("a[data-voyage]").forEach((a) => {
+          const v = a.getAttribute("data-voyage");
+          if (!v || v === "all") return;
+          const expected = `/${VOYAGE_PAGE}?v=${v}`;
+          const current = a.getAttribute("href") || "";
+          if (current !== expected) a.setAttribute("href", expected);
+        });
+      });
+    </script>
 
     <script type="module" src="src/main.jsx"></script>
     <script type="module" src="src/diary-loader.js"></script>
