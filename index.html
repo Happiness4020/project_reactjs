@@ -212,7 +212,7 @@
         document.querySelectorAll("a[data-voyage]").forEach((a) => {
           const v = a.getAttribute("data-voyage");
           if (!v || v === "all") return;
-          const expected = `/${VOYAGE_PAGE}?v=${v}`;
+          const expected = `${VOYAGE_PAGE}?v=${v}`;
           const current = a.getAttribute("href") || "";
           if (current !== expected) a.setAttribute("href", expected);
         });

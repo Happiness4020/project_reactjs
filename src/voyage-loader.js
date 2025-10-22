@@ -30,7 +30,7 @@ async function loadVoyage() {
     loading.style.display = "block";
 
     // Đường dẫn tương đối đến file JSON
-    const res = await fetch("/src/data/journal.json");
+    const res = await fetch("src/data/journal.json");
     if (!res.ok) {
       throw new Error(
         `Không thể tải dữ liệu. Lỗi: ${res.status} ${res.statusText}`
