@@ -145,16 +145,17 @@ async function loadVoyage() {
     const prevChapter = currentIndex > 0 ? chapters[currentIndex - 1] : null;
 
     const renderedHTML = `
-      <div id="voyage-content"> <div class="voyage-header">
-          <span class="voyage-badge"><i class="fas fa-anchor me-2"></i>Chuyến đi số ${displayNumber}</span>
-          <h1 class="voyage-title">${chapter.title}</h1>
-         
-        </div>
 
         <div class="chapter-section">
           <div class="chapter-header">
             <div class="chapter-number">${displayNumber}</div>
             <h2 class="chapter-title">${chapter.title}</h2>
+              <div class="chapter-meta">
+                <span class="meta-item"><i class="fas fa-calendar-alt"></i><span>${
+                  chapter.date
+                }</span></span>
+              </div>
+        
           </div>
           <div class="chapter-content">${contentHtml}</div>
           <div class="media-grid">
