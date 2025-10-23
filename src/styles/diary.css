@@ -81,7 +81,7 @@ body::before {
   position: relative;
   overflow: hidden;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-  background: url(../assets/image/background.jpg);
+  background: url(../assets/image/background_header.jpg);
   background-size: cover;
 }
 
@@ -201,7 +201,8 @@ body::before {
 
 .introduction-content p {
   margin-bottom: 1.5rem;
-  text-indent: 2em;
+  text-indent: 5em;
+  font-size: 1.4rem;
 }
 
 .introduction-content p:last-child {
