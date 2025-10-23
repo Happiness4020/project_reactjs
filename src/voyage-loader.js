@@ -61,37 +61,126 @@ async function loadVoyage() {
     // Cập nhật tiêu đề trang
     document.title = `${chapter.title} — Nhật Ký Hải Trình`;
 
+    // Tính toán số chuyến để hiển thị an toàn: ưu tiên chapter.number, nếu không có
+    // thì cố gắng rút ra chữ số từ chapter.id (ví dụ 'v1' -> '1'), nếu không có
+    // chữ số thì dùng chapter.id hoặc ký tự gạch ngang làm fallback.
+    const displayNumber =
+      chapter.number !== undefined && chapter.number !== null
+        ? chapter.number
+        : (() => {
+            const cid = chapter.id || "";
+            const m = cid.match(/\d+/);
+            if (m) return m[0];
+            return chapter.id || "—";
+          })();
+
+    // Helper: escape HTML and convert newlines to paragraphs/line breaks so
+    // long content from JSON renders with preserved line breaks.
+    function nl2p(text) {
+      if (!text && text !== 0) return "";
+      // Ensure it's a string
+      const s = String(text);
+      // Basic HTML-escape
+      const esc = s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+      // Split on two or more newlines -> paragraph, single newline -> <br>
+      const paras = esc.split(/\n{2,}/g).map((p) => p.replace(/\n/g, "<br>"));
+      return paras.map((p) => `<p>${p}</p>`).join("\n");
+    }
+
+    // escape helper for building inline content
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // Build content HTML by splitting paragraphs (\n\n). After each paragraph,
+    // if images array has an image at the same index, insert it as an inline
+    // image-card. Return remaining images (those not inserted) so media-grid can
+    // render them as gallery.
+    function buildContentWithInlineImages(text, images = [], title = "") {
+      if (!text && text !== 0) return { html: "", remaining: images || [] };
+      const paras = String(text).split(/\n{2,}/g);
+      let html = "";
+      for (let i = 0; i < paras.length; i++) {
+        const p = paras[i].trim();
+        if (!p) continue;
+        const esc = escapeHtml(p).replace(/\n/g, "<br>");
+        html += `<p>${esc}</p>` + "\n";
+        if (Array.isArray(images) && images[i]) {
+          const src = images[i];
+          html +=
+            `<div class="media-card image-card"><img src="${src}" alt="${escapeHtml(
+              title
+            )} image" loading="lazy"/></div>` + "\n\n";
+        }
+      }
+      const remaining = Array.isArray(images) ? images.slice(paras.length) : [];
+      return { html, remaining };
+    }
+
+    const { html: contentHtml, remaining: remainingImages } =
+      buildContentWithInlineImages(
+        chapter.content,
+        chapter.images,
+        chapter.title
+      );
+    const analysisHtml = nl2p(chapter.analysis);
+
     // Tạo HTML từ dữ liệu
+    // find current index to allow prev/next navigation
+    const currentIndex = chapters.findIndex((c) => c.id === chapter.id);
+    const nextChapter =
+      currentIndex >= 0 && currentIndex < chapters.length - 1
+        ? chapters[currentIndex + 1]
+        : null;
+    const prevChapter = currentIndex > 0 ? chapters[currentIndex - 1] : null;
+
     const renderedHTML = `
       <div id="voyage-content"> <div class="voyage-header">
-          <span class="voyage-badge"><i class="fas fa-anchor me-2"></i>Chuyến đi số ${
-            chapter.number
-          }</span>
+          <span class="voyage-badge"><i class="fas fa-anchor me-2"></i>Chuyến đi số ${displayNumber}</span>
           <h1 class="voyage-title">${chapter.title}</h1>
-          <div class="voyage-meta">
-            <div class="meta-item"><i class="fas fa-calendar-alt"></i><div><strong>Ngày:</strong> ${
-              chapter.date
-            }</div></div>
-          </div>
+         
         </div>
 
         <div class="chapter-section">
           <div class="chapter-header">
-            <div class="chapter-number">${chapter.number}</div>
+            <div class="chapter-number">${displayNumber}</div>
             <h2 class="chapter-title">${chapter.title}</h2>
           </div>
-          <div class="chapter-content">${chapter.content}</div>
+          <div class="chapter-content">${contentHtml}</div>
           <div class="media-grid">
-            <div class="media-card"><i class="fas fa-map"></i><h6>Bản đồ tuyến đường</h6><p>${
-              chapter.mapTitle || "Bản đồ hải trình"
-            }</p></div>
-            <div class="media-card"><i class="fas fa-image"></i><h6>Hình minh họa</h6><p>${
-              chapter.sketchTitle || "Minh họa thuyền buồm"
-            }</p></div>
+            ${
+              Array.isArray(remainingImages) && remainingImages.length
+                ? remainingImages
+                    .map(
+                      (src) =>
+                        `<div class="media-card image-card"><img src="${src}" alt="${chapter.title} image" loading="lazy"/></div>`
+                    )
+                    .join("")
+                : `
+           
+            `
+            }
           </div>
-          <div class="analysis-box"><h5><i class="fas fa-lightbulb"></i> Phân tích</h5><p>${
-            chapter.analysis
-          }</p></div>
+          
+
+          <div class="chapter-navigation">
+            <a class="nav-btn ${!prevChapter ? "disabled" : ""}" href="${
+      prevChapter ? `voyage.html?v=${prevChapter.id.replace(/^v/, "")}` : "#"
+    }"><i class="fas fa-chevron-left"></i> Trước</a>
+            <a class="nav-btn ${!nextChapter ? "disabled" : ""}" href="${
+      nextChapter ? `voyage.html?v=${nextChapter.id.replace(/^v/, "")}` : "#"
+    }">Tiếp theo <i class="fas fa-chevron-right"></i></a>
+          </div>
         </div>
       </div>
     `;

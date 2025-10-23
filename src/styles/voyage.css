@@ -28,6 +28,8 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden; /* Thêm dòng này để tránh lỗi cuộn ngang */
+  background: url(../assets/image/background.jpg);
+  background-size: cover;
 }
 
 /* 2. Thay thế hiệu ứng nền (từ xanh sang nâu ấm) */
@@ -121,7 +123,7 @@ body::before {
 
 .voyage-title {
   font-family: "Noto Serif", serif;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 700;
   color: var(--ocean-dark);
   margin-bottom: 20px;
@@ -239,28 +241,29 @@ body::before {
 
 .chapter-title {
   font-family: "Noto Serif", serif;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--ocean-dark);
   margin-bottom: 15px;
 }
 
 .chapter-content {
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   line-height: 1.9;
   color: var(--text-dark);
   margin-bottom: 30px;
 }
 
 .chapter-content p {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding-top: 50px;
   text-align: justify;
 }
 
 /* Media Grid */
 .media-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin: 30px 0;
 }
@@ -281,6 +284,59 @@ body::before {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+}
+
+.media-card image {
+  max-width: 30rem;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Image card tweaks: tighter padding and responsive images */
+
+.media-card.image-card {
+  padding: 18px; /* tighter frame */
+  min-height: 0; /* allow height to be driven by image */
+  border-style: solid; /* make image cards use solid border to look like frames */
+}
+
+/* Gallery images: show whole image without cropping */
+.media-card.image-card img {
+  display: block;
+  width: 100%;
+  height: auto; /* let natural aspect ratio decide height */
+  object-fit: contain; /* show entire image */
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  background: var(--parchment);
+}
+
+/* Inline images inserted inside content: center and limit width */
+.chapter-content .media-card.image-card {
+  padding: 30px;
+  padding-bottom: 20px;
+  margin: 24px auto; /* increase vertical spacing */
+  width: calc(100% - 40px);
+  max-width: 900px;
+}
+
+.chapter-content .media-card.image-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Make images taller on larger screens */
+@media (min-width: 1200px) {
+  .media-card.image-card img {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .media-card.image-card img {
+    height: 200px;
+  }
 }
 
 .media-card:hover {
