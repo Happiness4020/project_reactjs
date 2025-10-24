@@ -327,7 +327,7 @@ body::after {
 .chapter-content p {
   margin-bottom: 25px;
   text-align: justify;
-  text-indent: 2em;
+  text-indent: 0;
 }
 
 .chapter-content p:first-of-type {
