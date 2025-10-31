@@ -94,6 +94,14 @@ body::after {
   z-index: 1;
 }
 
+/*chú thích hình ảnh*/
+.image-caption {
+  text-align: center;
+  padding: 8px;
+  color: #666;
+  font-style: italic;
+}
+
 /* ===== BACK BUTTON ===== */
 .back-button {
   background: white;

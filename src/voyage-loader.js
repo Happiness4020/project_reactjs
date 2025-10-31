@@ -117,10 +117,14 @@ async function loadVoyage() {
         html += `<p>${esc}</p>` + "\n";
         if (Array.isArray(images) && images[i]) {
           const src = images[i];
+          const caption = chapter.imageCaptions?.[i] || "Hình ảnh chuyến đi"; // Sử dụng caption từ JSON nếu có
           html +=
-            `<div class="media-card image-card"><img src="${src}" alt="${escapeHtml(
+            `<div class="media-card image-card">
+              <img src="${src}" alt="${escapeHtml(
               title
-            )} image" loading="lazy"/></div>` + "\n\n";
+            )} image" loading="lazy"/>
+              <div class="image-caption">${escapeHtml(caption)}</div>
+            </div>` + "\n\n";
         }
       }
       const remaining = Array.isArray(images) ? images.slice(paras.length) : [];
@@ -162,10 +166,19 @@ async function loadVoyage() {
             ${
               Array.isArray(remainingImages) && remainingImages.length
                 ? remainingImages
-                    .map(
-                      (src) =>
-                        `<div class="media-card image-card"><img src="${src}" alt="${chapter.title} image" loading="lazy"/></div>`
-                    )
+                    .map((src, index) => {
+                      const caption =
+                        chapter.imageCaptions?.[index + paras.length] ||
+                        "Hình ảnh chuyến đi";
+                      return `<div class="media-card image-card">
+                          <img src="${src}" alt="${
+                        chapter.title
+                      } image" loading="lazy"/>
+                          <div class="image-caption">${escapeHtml(
+                            caption
+                          )}</div>
+                        </div>`;
+                    })
                     .join("")
                 : `
            
