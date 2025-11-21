@@ -123,7 +123,7 @@ async function loadVoyage() {
               <img src="${src}" alt="${escapeHtml(
               title
             )} image" loading="lazy"/>
-              
+              <div class="image-caption">${escapeHtml(caption)}</div>
             </div>` + "\n\n";
         }
       }
