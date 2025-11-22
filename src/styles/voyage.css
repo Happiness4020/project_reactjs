@@ -463,6 +463,23 @@ body::after {
   margin: 40px 0;
 }
 
+/* Row of images (e.g., 2 or 3 images on same line) */
+.media-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin: 25px 0;
+  width: 100%;
+}
+
+.media-row.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.media-row.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .media-card {
   background: linear-gradient(
     135deg,
@@ -520,7 +537,7 @@ body::after {
 
 /* Image Cards */
 .media-card.image-card {
-  padding: 25px;
+  padding: 12px;
   min-height: 0;
   border-style: solid;
   background: linear-gradient(
@@ -536,35 +553,53 @@ body::after {
   display: block;
   width: 100%;
   height: auto;
+  max-height: 400px;
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 8px 25px var(--shadow);
   background: var(--parchment);
 }
 
+.media-card.image-card .image-caption {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  font-style: italic;
+  text-align: center;
+}
+
 .chapter-content .media-card.image-card {
-  padding: 35px;
-  padding-bottom: 25px;
-  margin: 30px auto;
-  width: calc(100% - 40px);
-  max-width: 900px;
+  padding: 12px;
+  padding-bottom: 10px;
 }
 
 .chapter-content .media-card.image-card img {
   width: 100%;
   height: auto;
+  max-height: 450px;
   object-fit: contain;
 }
 
 @media (min-width: 1200px) {
   .media-card.image-card img {
-    min-height: 320px;
+    min-height: 250px;
+    max-height: 500px;
   }
 }
 
 @media (max-width: 768px) {
   .media-card.image-card img {
-    min-height: 200px;
+    min-height: 180px;
+    max-height: 350px;
+  }
+
+  .media-row {
+    grid-template-columns: 1fr;
+  }
+
+  .media-row.cols-2,
+  .media-row.cols-3 {
+    grid-template-columns: 1fr;
   }
 }
 

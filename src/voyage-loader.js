@@ -110,24 +110,66 @@ async function loadVoyage() {
       if (!text && text !== 0) return { html: "", remaining: images || [] };
       const paras = String(text).split(/\n{2,}/g);
       let html = "";
+      let usedImages = 0;
+
       for (let i = 0; i < paras.length; i++) {
         const p = paras[i].trim();
         if (!p) continue;
         const esc = escapeHtml(p).replace(/\n/g, "<br>");
         html += `<p>${esc}</p>` + "\n";
+
+        // Check if there's an image or row of images at this index
         if (Array.isArray(images) && images[i]) {
-          const src = images[i];
-          const caption = chapter.imageCaptions?.[i] || "Hình ảnh chuyến đi"; // Sử dụng caption từ JSON nếu có
-          html +=
-            `<div class="media-card image-card">
-              <img src="${src}" alt="${escapeHtml(
-              title
-            )} image" loading="lazy"/>
-              <div class="image-caption">${escapeHtml(caption)}</div>
-            </div>` + "\n\n";
+          const imageItem = images[i];
+
+          // If it's an array (multiple images on same row)
+          if (Array.isArray(imageItem)) {
+            const colsClass =
+              imageItem.length === 2
+                ? "cols-2"
+                : imageItem.length >= 3
+                ? "cols-3"
+                : "cols-1";
+            html += `<div class="media-row ${colsClass}">` + "\n";
+
+            imageItem.forEach((src, idx) => {
+              const caption =
+                chapter.imageCaptions?.[usedImages + idx] ||
+                "Hình ảnh chuyến đi";
+              html +=
+                `<div class="media-card image-card">
+                  <img src="${src}" alt="${escapeHtml(
+                  title
+                )} image" loading="lazy"/>
+                  <div class="image-caption">${escapeHtml(caption)}</div>
+                </div>` + "\n";
+            });
+
+            html += `</div>` + "\n\n";
+            usedImages += imageItem.length;
+          }
+          // If it's a string (single image)
+          else {
+            const src = imageItem;
+            const caption =
+              chapter.imageCaptions?.[usedImages] || "Hình ảnh chuyến đi";
+            html +=
+              `<div class="media-card image-card">
+                <img src="${src}" alt="${escapeHtml(title)}" loading="lazy"/>
+                <div class="image-caption">${escapeHtml(caption)}</div>
+              </div>` + "\n\n";
+            usedImages += 1;
+          }
         }
       }
-      const remaining = Array.isArray(images) ? images.slice(paras.length) : [];
+
+      // Remaining images that weren't inserted inline
+      const remaining = Array.isArray(images)
+        ? images
+            .slice(paras.length)
+            .filter((img) => !Array.isArray(img) || img.length === 0)
+        : [];
+
       return { html, remaining };
     }
 
